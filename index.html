@@ -107,6 +107,7 @@ function grabAHeart(hero, heart) {
     heart.x = Phaser.Math.RND.integerInRange(32, 750);
     heart.y = Phaser.Math.RND.integerInRange(32, 550);
     heart.enableBody(true, heart.x, heart.y, true, true);
+    holes.create(Phaser.Math.RND.integerInRange(32, 750), Phaser.Math.RND.integerInRange(32, 550), 'hole');
 }
 
 function fallIntoHole(hero, hole) {
