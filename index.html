@@ -35,12 +35,20 @@ var game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('background', 'assets/background.png');
+    this.load.image('tree', 'assets/tree.png');
     this.load.spritesheet('hero', 'assets/hero.png', { frameWidth: 16, frameHeight: 24 });
 }
 
 function create() {
     this.add.tileSprite(400, 300, 800, 600, 'background');
+    trees = this.physics.add.staticGroup();
+    for (var i=0; i<=10; i++) {
+        trees.create(Phaser.Math.RND.integerInRange(32, 500), Phaser.Math.RND.integerInRange(32, 500), 'tree');
+    }
+    
     hero = this.physics.add.sprite(100, 450, 'hero');
+    hero.setCollideWorldBounds(true);
+    this.physics.add.collider(hero, trees);
 
     this.anims.create({
         key: 'down',
