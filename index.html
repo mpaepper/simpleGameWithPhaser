@@ -32,6 +32,8 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+var score = 0;
+var scoreText;
 
 function preload() {
     this.load.image('background', 'assets/background.png');
@@ -87,10 +89,14 @@ function create() {
         frameRate: 20
     });
     cursors = this.input.keyboard.createCursorKeys();
+
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFF' });
 }
 
 function grabAHeart(hero, heart) {
     heart.disableBody(true, true);
+    score += 100;
+    scoreText.setText('Score: ' + score);
     alert('You grabbed a heart');
 }
 
