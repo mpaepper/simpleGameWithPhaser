@@ -34,11 +34,13 @@ var config = {
 var game = new Phaser.Game(config);
 var score = 0;
 var scoreText;
+var gameOver = false;
 
 function preload() {
     this.load.image('background', 'assets/background.png');
     this.load.image('heart', 'assets/heart.png');
     this.load.image('tree', 'assets/tree.png');
+    this.load.image('hole', 'assets/hole.png');
     this.load.spritesheet('hero', 'assets/hero.png', { frameWidth: 16, frameHeight: 24 });
 }
 
@@ -52,12 +54,17 @@ function create() {
     for (var i=0; i<=5; i++) {
         hearts.create(Phaser.Math.RND.integerInRange(32, 750), Phaser.Math.RND.integerInRange(32, 550), 'heart');
     }
+    holes = this.physics.add.staticGroup();
+    for (var i=0; i<=5; i++) {
+        holes.create(Phaser.Math.RND.integerInRange(32, 750), Phaser.Math.RND.integerInRange(32, 550), 'hole');
+    }
     
     hero = this.physics.add.sprite(100, 450, 'hero');
     hero.setCollideWorldBounds(true);
     this.physics.add.collider(hero, trees);
     
     this.physics.add.overlap(hero, hearts, grabAHeart, null, this);
+    this.physics.add.overlap(hero, holes, fallIntoHole, null, this);
 
     this.anims.create({
         key: 'down',
@@ -102,7 +109,17 @@ function grabAHeart(hero, heart) {
     heart.enableBody(true, heart.x, heart.y, true, true);
 }
 
+function fallIntoHole(hero, hole) {
+    gameOver = true;
+    this.physics.pause();
+    hero.anims.play('nomove', true);
+    scoreText.setText("Game Over! Your score: " + score);
+}
+
 function update() {
+    if (gameOver) {
+        return;
+    }
     if (cursors.left.isDown) {
         hero.setVelocityX(-160);
         hero.setVelocityY(0);
