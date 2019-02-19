@@ -3,6 +3,10 @@
 This is a very small JavaScript game I wrote in about 2 hours to try out [Phaser](https://phaser.io/).
 It's a cool game engine to quickly build games.
 
+## Blog Post
+
+There is a blog post which describes how I built the game in case you want to try it out: [Build your own JavaScript game in 5 minutes](https://www.paepper.com/blog/posts/build-your-own-javascript-game-in-5-minutes/)
+
 ## The game
 
 In this game, your job is to collect hearts. For each heart you collect, you gain 100 points. But for each heart you collect, a hole appears in the world.
