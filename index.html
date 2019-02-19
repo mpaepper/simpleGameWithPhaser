@@ -35,6 +35,7 @@ var game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('background', 'assets/background.png');
+    this.load.image('heart', 'assets/heart.png');
     this.load.image('tree', 'assets/tree.png');
     this.load.spritesheet('hero', 'assets/hero.png', { frameWidth: 16, frameHeight: 24 });
 }
@@ -45,10 +46,16 @@ function create() {
     for (var i=0; i<=10; i++) {
         trees.create(Phaser.Math.RND.integerInRange(32, 500), Phaser.Math.RND.integerInRange(32, 500), 'tree');
     }
+    hearts = this.physics.add.staticGroup();
+    for (var i=0; i<=5; i++) {
+        hearts.create(Phaser.Math.RND.integerInRange(32, 500), Phaser.Math.RND.integerInRange(32, 500), 'heart');
+    }
     
     hero = this.physics.add.sprite(100, 450, 'hero');
     hero.setCollideWorldBounds(true);
     this.physics.add.collider(hero, trees);
+    
+    this.physics.add.overlap(hero, hearts, grabAHeart, null, this);
 
     this.anims.create({
         key: 'down',
@@ -80,6 +87,11 @@ function create() {
         frameRate: 20
     });
     cursors = this.input.keyboard.createCursorKeys();
+}
+
+function grabAHeart(hero, heart) {
+    heart.disableBody(true, true);
+    alert('You grabbed a heart');
 }
 
 function update() {
