@@ -45,12 +45,12 @@ function preload() {
 function create() {
     this.add.tileSprite(400, 300, 800, 600, 'background');
     trees = this.physics.add.staticGroup();
-    for (var i=0; i<=10; i++) {
-        trees.create(Phaser.Math.RND.integerInRange(32, 500), Phaser.Math.RND.integerInRange(32, 500), 'tree');
+    for (var i=0; i<=20; i++) {
+        trees.create(Phaser.Math.RND.integerInRange(32, 750), Phaser.Math.RND.integerInRange(32, 550), 'tree');
     }
     hearts = this.physics.add.staticGroup();
     for (var i=0; i<=5; i++) {
-        hearts.create(Phaser.Math.RND.integerInRange(32, 500), Phaser.Math.RND.integerInRange(32, 500), 'heart');
+        hearts.create(Phaser.Math.RND.integerInRange(32, 750), Phaser.Math.RND.integerInRange(32, 550), 'heart');
     }
     
     hero = this.physics.add.sprite(100, 450, 'hero');
@@ -97,7 +97,6 @@ function grabAHeart(hero, heart) {
     heart.disableBody(true, true);
     score += 100;
     scoreText.setText('Score: ' + score);
-    alert('You grabbed a heart');
 }
 
 function update() {
