@@ -34,6 +34,17 @@ var config = {
 
 var game = new Phaser.Game(config);
 
+function preload() {
+    this.load.image('background', 'assets/background.png');
+}
+
+function create() {
+    this.add.tileSprite(400, 300, 800, 600, 'background');
+}
+
+function update() {
+}
+
 </script>
 
 </body>
