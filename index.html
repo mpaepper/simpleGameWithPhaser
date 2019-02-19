@@ -113,6 +113,7 @@ function fallIntoHole(hero, hole) {
     gameOver = true;
     this.physics.pause();
     hero.anims.play('nomove', true);
+    hero.setTint(0xff0000);
     scoreText.setText("Game Over! Your score: " + score);
 }
 
