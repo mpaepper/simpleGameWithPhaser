@@ -97,6 +97,9 @@ function grabAHeart(hero, heart) {
     heart.disableBody(true, true);
     score += 100;
     scoreText.setText('Score: ' + score);
+    heart.x = Phaser.Math.RND.integerInRange(32, 750);
+    heart.y = Phaser.Math.RND.integerInRange(32, 550);
+    heart.enableBody(true, heart.x, heart.y, true, true);
 }
 
 function update() {
